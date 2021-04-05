@@ -1,0 +1,12 @@
+{
+	"appName": {"message": "URL Block"},
+	"appDescription": {"message": "Block URLs"},
+	"setting": {"message": "Setting"},
+	"enable_url_block": {"message": "Enable URL Block"},
+	"block_current_domain": {"message": "Block Current Domain"},
+	"input_url": {"message": "URL..."},
+	"add": {"message": "Add"},
+	"author": {"message": "Author: "},
+	"blocked_url_list": {"message": "Blocked URLs List"},
+	"you_must_write_sth": {"message": "You must an URL!"}
+}

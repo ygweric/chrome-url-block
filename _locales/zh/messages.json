@@ -1,0 +1,12 @@
+{
+	"appName": {"message": "网址拦截"},
+	"appDescription": {"message": "拦截网址"},
+	"setting": {"message": "设置"},
+	"enable_url_block": {"message": "运行App"},
+	"block_current_domain": {"message": "拦截当前网址"},
+	"input_url": {"message": "网址..."},
+	"add": {"message": "添加"},
+	"author": {"message": "开发者: "},
+	"blocked_url_list": {"message": "拦截网址列表"},
+	"you_must_write_sth": {"message": "请输入网址"}
+}
