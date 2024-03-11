@@ -9,7 +9,6 @@ import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
 import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
-import UnoCSS from 'unocss/vite'
 import { isDev, port, r } from './scripts/utils'
 import packageJson from './package.json'
 
@@ -58,9 +57,6 @@ export const sharedConfig: UserConfig = {
 
     // https://github.com/antfu/unplugin-icons
     Icons(),
-
-    // https://github.com/unocss/unocss
-    UnoCSS(),
 
     // rewrite assets to use relative path
     {

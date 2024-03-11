@@ -11,12 +11,12 @@ function openOptionsPage() {
 </script>
 
 <template>
-  <main class="w-[300px] px-4 py-5 text-center text-gray-700 flex flex-col flex-justify-begin flex-items-center gap-y-6  min-h-60">
+  <main class="w-[300px] px-4 py-5 text-center text-gray-700 flex flex-col flex-justify-begin items-center gap-y-6  min-h-72">
     <Logo />
-    <div class="font-size-6 color-red-600 font-bold mt--4">
+    <div class="font-size-6 color-red-600 font-bold -mt-4">
       URL Block
     </div>
-    <div class="flex flex-items-center flex-justify-between w-40">
+    <div class="flex items-center justify-between w-40">
       <div class="mr-4">
         On/Off
       </div>
