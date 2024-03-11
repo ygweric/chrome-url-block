@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { storageDemo } from '~/logic/storage'
+// import { storageDemo } from '~/logic/storage'
 </script>
 
 <template>
@@ -7,11 +7,11 @@ import { storageDemo } from '~/logic/storage'
     <a-button type="primary">
       Primary
     </a-button>
-    <img src="/assets/icon.svg" class="icon-btn mx-2 text-2xl" alt="extension icon">
+    <img src="/assets/logo.png" class="icon-btn mx-2 text-2xl" alt="extension icon">
     <div>Options</div>
     <SharedSubtitle />
 
-    <input v-model="storageDemo" class="border border-gray-400 rounded px-2 py-1 mt-2">
+    <!-- <input v-model="storageDemo" class="border border-gray-400 rounded px-2 py-1 mt-2"> -->
 
     <div class="mt-4">
       Powered by Vite <pixelarticons-zap class="align-middle inline-block" />

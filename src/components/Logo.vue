@@ -1,5 +1,3 @@
 <template>
-  <a class="icon-btn mx-2 text-2xl" rel="noreferrer" href="https://github.com/antfu/vitesse-webext" target="_blank" title="GitHub">
-    <pixelarticons-power />
-  </a>
+  <img src="../assets/logo.png" class="icon-btn mx-2 text-2xl w-8 h-8" alt="extension icon">
 </template>

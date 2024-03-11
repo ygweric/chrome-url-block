@@ -1,3 +1,5 @@
 import { useWebExtensionStorage } from '~/composables/useWebExtensionStorage'
 
-export const storageDemo = useWebExtensionStorage('webext-demo', 'Storage Demo')
+export const blockedEnabled = useWebExtensionStorage('webext-blocked-enabled', false)
+
+export const blockedUrls = useWebExtensionStorage('webext-blocked-urls', [] as string[])
