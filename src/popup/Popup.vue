@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { IconEyeInvisible, IconSettings } from '@arco-design/web-vue/es/icon'
 import { blockedEnabled } from '~/logic'
+import { addBlockURL, closeTab } from '~/logic/general'
 
 function openOptionsPage() {
   browser.runtime.openOptionsPage()
 }
-
-// blockedUrls
-// blockedEnabled
+async function blockCurrentURL() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true })
+  const currentTab = tabs[0]
+	  const url = currentTab.url
+	  console.log(url)
+	  url && addBlockURL(url)
+	  closeTab(currentTab)
+}
 </script>
 
 <template>
@@ -31,7 +37,7 @@ function openOptionsPage() {
     </div>
 
     <div class="w-40">
-      <a-button status="warning" type="primary" long>
+      <a-button status="warning" type="primary" long @click="blockCurrentURL">
         <template #icon>
           <IconEyeInvisible />
         </template>

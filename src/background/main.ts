@@ -1,5 +1,6 @@
 import { onMessage, sendMessage } from 'webext-bridge/background'
 import type { Tabs } from 'webextension-polyfill'
+import './urlBlock'
 
 // only on dev mode
 if (import.meta.hot) {
@@ -10,7 +11,6 @@ if (import.meta.hot) {
 }
 
 browser.runtime.onInstalled.addListener((): void => {
-  // eslint-disable-next-line no-console
   console.log('Extension installed')
 })
 
@@ -34,7 +34,6 @@ browser.tabs.onActivated.addListener(async ({ tabId }) => {
     return
   }
 
-  // eslint-disable-next-line no-console
   console.log('previous tab', tab)
   sendMessage('tab-prev', { title: tab.title }, { context: 'content-script', tabId })
 })
