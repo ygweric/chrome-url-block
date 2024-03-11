@@ -4,6 +4,9 @@ import { storageDemo } from '~/logic/storage'
 
 <template>
   <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
+    <a-button type="primary">
+      Primary
+    </a-button>
     <img src="/assets/icon.svg" class="icon-btn mx-2 text-2xl" alt="extension icon">
     <div>Options</div>
     <SharedSubtitle />
