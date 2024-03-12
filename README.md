@@ -1,6 +1,10 @@
 
 
-# 浏览器中优化逻辑
+
+# ~~浏览器中优化逻辑~~  
+**用不着**， 插件中的popup、options、background已经可以热更新了
+只有contentScript需要手动reload插件后，刷新页面
+
 只需要让**popup**,**options** 通过localhost访问，**background**不涉及UI，可以在浏览器调试
 
 1. vite.config
