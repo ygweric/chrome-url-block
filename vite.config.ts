@@ -7,7 +7,7 @@ import Vue from '@vitejs/plugin-vue'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
-import { ArcoResolver } from 'unplugin-vue-components/resolvers'
+// import { ArcoResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import { isDev, port, r } from './scripts/utils'
 import packageJson from './package.json'
@@ -36,7 +36,9 @@ export const sharedConfig: UserConfig = {
         },
       ],
       dts: r('src/auto-imports.d.ts'),
-      resolvers: [ArcoResolver()],
+      resolvers: [
+        // ArcoResolver()
+      ],
     }),
 
     // https://github.com/antfu/unplugin-vue-components
@@ -49,9 +51,9 @@ export const sharedConfig: UserConfig = {
         IconsResolver({
           prefix: '',
         }),
-        ArcoResolver({
-          sideEffect: true,
-        }),
+        // ArcoResolver({
+        //   sideEffect: true,
+        // }),
       ],
     }),
 

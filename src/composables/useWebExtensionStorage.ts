@@ -13,6 +13,10 @@ import type { Storage } from 'webextension-polyfill'
 
 export type WebExtensionStorageOptions<T> = UseStorageAsyncOptions<T>
 
+/**
+ *  storage.local The quota limitation is approximately 100 KB, 8 KB per item. https://developer.chrome.com/docs/extensions/reference/api/storage
+ */
+
 // https://github.com/vueuse/vueuse/blob/658444bf9f8b96118dbd06eba411bb6639e24e88/packages/core/useStorage/guess.ts
 export function guessSerializerType<T extends(string | number | boolean | object | null)>(rawInit: T) {
   return rawInit == null
