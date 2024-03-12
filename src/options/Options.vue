@@ -50,10 +50,10 @@ const urls = computed(() => blockedUrls.value.map(url => ({ url })))
       <a-form :model="form" class="w-full" @submit="addUrl">
         <a-row :gutter="8">
           <a-col :span="18">
-            <a-form-item field="newUrl" tooltip="Enter the url you want to block" label="URL To Block" required>
+            <a-form-item field="newUrl" tooltip="Enter the URL you want to block" label="URL To Block" required>
               <a-input
                 v-model="form.newUrl"
-                placeholder="please enter the url..."
+                placeholder="please enter the URL..."
               />
             </a-form-item>
           </a-col>
@@ -65,7 +65,6 @@ const urls = computed(() => blockedUrls.value.map(url => ({ url })))
         </a-row>
       </a-form>
       <a-divider />
-      {{ blockedUrls }}
       <a-table :columns="columns" :data="urls" :pagination="{ 'show-page-size': true, 'show-total': true }">
         <template #actions="{ record }">
           <a-space>

@@ -12,7 +12,7 @@ async function blockCurrentURL() {
 	  const url = currentTab.url
 	  console.log(url)
 	  url && addBlockURL(url)
-	  closeTab(currentTab)
+	  blockedEnabled.value && closeTab(currentTab)
 }
 </script>
 
