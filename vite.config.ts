@@ -80,6 +80,14 @@ export const sharedConfig: UserConfig = {
       'vue-demi',
     ],
   },
+  css: {
+    postcss: {
+      plugins: [
+        require('tailwindcss'),
+        require('autoprefixer'),
+      ],
+    },
+  },
 }
 
 export default defineConfig(({ command }) => ({

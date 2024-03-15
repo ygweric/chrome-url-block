@@ -1,9 +1,11 @@
 /* 这里不能引入总styles，因为会和宿主页面冲突，因此只引入tailwindCss和Arco */
 /* content script里面不能有太多样式，否则和页面冲突 */
+
+@config "./tailwindcss/tailwind.contentScript.config.js";
+
 /* base 是html元素的设置 */
 /* @tailwind base; */
 /* components 是配合component使用的 */
 /* @tailwind components; */
 /* 这个是我们认识的 class 表达式 */
 @tailwind utilities;
-

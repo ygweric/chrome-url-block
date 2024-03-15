@@ -1,19 +1,17 @@
 <script setup lang="ts">
-// import { useToggle } from '@vueuse/core'
+import { useToggle } from '@vueuse/core'
 
-// const [show, toggle] = useToggle(false)
+const [show, toggle] = useToggle(false)
 </script>
 
 <template>
-  <div class="fixed right-48 bottom-0 m-5 z-100 flex items-end font-sans select-none leading-1em">
-    <!-- <div
-      class=" bg-yellow-600 text-gray-800 rounded-lg shadow w-max h-min"
-      p="x-4 y-2"
-      m="y-auto r-2"
-      transition="opacity duration-300"
-      :class="show ? 'opacity-100' : 'opacity-20'"
+  <div class="rr-fixed rr-right-48 rr-bottom-0 rr-m-5 rr-z-100 rr-flex rr-items-end rr-font-sans rr-select-none rr-leading-1em">
+    <div
+      class=" rr-bg-yellow-700 rr-text-gray-800 rr-rounded-lg shadow rr-w-max rr-h-min"
+      transition="rr-opacity rr-duration-300"
+      :class="show ? 'rr-opacity-100' : 'rr-opacity-20'"
     >
-      <h1 class="text-lg">
+      <h1 class="rr-text-lg">
         Vitesse WebExt
       </h1>
     </div>
@@ -23,7 +21,7 @@
 
       @click="toggle()"
     >
-      xssssx
-    </a-button> -->
+      button
+    </a-button>
   </div>
 </template>
