@@ -39,6 +39,10 @@ module.exports = {
     "no-console": 0,
     "no-tabs": 0,
     "no-mixed-spaces-and-tabs": 0,
+    "prettier/prettier": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/extensions": 0,
+    "@typescript-eslint/no-explicit-any": 0,
   },
   globals: {},
 };
