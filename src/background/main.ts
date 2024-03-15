@@ -1,13 +1,19 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import { onMessage, sendMessage } from "webext-bridge/background";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import type { Tabs } from "webextension-polyfill";
 import "./urlBlock";
 
 // only on dev mode
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 if (import.meta.hot) {
   // @ts-expect-error for background HMR
   // eslint-disable-next-line import/no-unresolved
-  import("../../../../../@vite/client");
+  import("@vite/client");
   // load latest content script
   import("./contentScriptHMR");
 }
@@ -20,7 +26,7 @@ let previousTabId = 0;
 
 // communication example: send previous tab title from background page
 // see shim.d.ts for type declaration
-browser.tabs.onActivated.addListener(async ({ tabId }) => {
+browser.tabs.onActivated.addListener(async ({ tabId }: { tabId: number }) => {
   if (!previousTabId) {
     previousTabId = tabId;
     return;
