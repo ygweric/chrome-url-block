@@ -1,18 +1,28 @@
 <script setup lang="ts">
 import { IconEyeInvisible, IconSettings } from '@arco-design/web-vue/es/icon'
+import { computedAsync } from '@vueuse/core'
 import { blockedEnabled } from '~/logic'
 import { addBlockURL, closeTab } from '~/logic/general'
 
 function openOptionsPage() {
   browser.runtime.openOptionsPage()
 }
+
+const isHttpUrl = computedAsync(async () => {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true })
+  const currentTab = tabs[0]
+  const url = currentTab.url
+  console.log(url)
+
+  return url?.startsWith('http')
+})
 async function blockCurrentURL() {
   const tabs = await browser.tabs.query({ active: true, currentWindow: true })
   const currentTab = tabs[0]
-	  const url = currentTab.url
-	  console.log(url)
-	  url && addBlockURL(url)
-	  blockedEnabled.value && closeTab(currentTab)
+  const url = currentTab.url
+  console.log(url)
+  url && addBlockURL(url)
+  blockedEnabled.value && closeTab(currentTab)
 }
 </script>
 
@@ -37,7 +47,7 @@ async function blockCurrentURL() {
     </div>
 
     <div class="w-40">
-      <a-button status="warning" type="primary" long @click="blockCurrentURL">
+      <a-button status="warning" type="primary" long :disabled="!isHttpUrl" @click="blockCurrentURL">
         <template #icon>
           <IconEyeInvisible />
         </template>
