@@ -31,6 +31,6 @@ export const storageDemo = 3 // 不使用 useWebExtensionStorage
 ```
 
 
-
+## manifest.ts修改后，需要手动卸载插件在安装才生效
 
 

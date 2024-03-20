@@ -1,10 +1,16 @@
-import fs from 'fs-extra'
-import type { Manifest } from 'webextension-polyfill'
-import type PkgType from '../package.json'
-import { isDev, isFirefox, port, r } from '../scripts/utils'
+import fs from "fs-extra";
+import type { Manifest } from "webextension-polyfill";
+import type PkgType from "../package.json";
+import { isDev, isFirefox, port, r } from "../scripts/utils";
+import {
+  hasBackgroundScript,
+  hasContentScript,
+  hasOptionPage,
+  hasPopupPage,
+} from "./env";
 
 export async function getManifest() {
-  const pkg = await fs.readJSON(r('package.json')) as typeof PkgType
+  const pkg = (await fs.readJSON(r("package.json"))) as typeof PkgType;
 
   // update this file to update this manifest.json
   // can also be conditional based on your need
@@ -14,64 +20,64 @@ export async function getManifest() {
     version: pkg.version,
     description: pkg.description,
     action: {
-      default_icon: './assets/logo.png',
-      default_popup: './dist/popup/index.html',
+      default_icon: "./assets/logo.png",
+      default_popup: !hasPopupPage ? undefined : "./dist/popup/index.html",
     },
-    options_ui: {
-      page: './dist/options/index.html',
-      open_in_tab: true,
-    },
-    background: isFirefox
+    options_ui: !hasOptionPage
+      ? undefined
+      : {
+          page: "./dist/options/index.html",
+          open_in_tab: true,
+        },
+    background: !hasBackgroundScript
+      ? undefined
+      : isFirefox
       ? {
-          scripts: ['dist/background/index.mjs'],
-          type: 'module',
+          scripts: ["dist/background/index.mjs"],
+          type: "module",
         }
       : {
-          service_worker: './dist/background/index.mjs',
+          service_worker: "./dist/background/index.mjs",
         },
     icons: {
-      16: './assets/logo.png',
-      48: './assets/logo.png',
-      128: './assets/logo.png',
+      16: "./assets/logo.png",
+      48: "./assets/logo.png",
+      128: "./assets/logo.png",
     },
-    permissions: [
-      'tabs',
-      'storage',
-      'activeTab',
-    ],
-    host_permissions: ['*://*/*'],
-    content_scripts: [
-      {
-        matches: [
-          '<all_urls>',
+    permissions: ["tabs", "storage", "activeTab"],
+    host_permissions: ["*://*/*"],
+    content_scripts: !hasContentScript
+      ? undefined
+      : [
+          {
+            matches: ["<all_urls>"],
+            js: ["dist/contentScripts/index.global.js"],
+          },
         ],
-        js: [
-          'dist/contentScripts/index.global.js',
+    web_accessible_resources: !hasContentScript
+      ? undefined
+      : [
+          {
+            resources: ["dist/contentScripts/style.css"],
+            matches: ["<all_urls>"],
+          },
         ],
-      },
-    ],
-    web_accessible_resources: [
-      {
-        resources: ['dist/contentScripts/style.css'],
-        matches: ['<all_urls>'],
-      },
-    ],
     content_security_policy: {
       extension_pages: isDev
-        // this is required on dev for Vite script to load
-        ? `script-src \'self\' http://localhost:${port}; object-src \'self\'`
-        : 'script-src \'self\'; object-src \'self\'',
+        ? // this is required on dev for Vite script to load
+          `script-src \'self\' http://localhost:${port}; object-src \'self\'`
+        : "script-src 'self'; object-src 'self'",
     },
-  }
+  };
 
   // FIXME: not work in MV3
   if (isDev && false) {
     // for content script, as browsers will cache them for each reload,
     // we use a background script to always inject the latest version
     // see src/background/contentScriptHMR.ts
-    delete manifest.content_scripts
-    manifest.permissions?.push('webNavigation')
+    delete manifest.content_scripts;
+    manifest.permissions?.push("webNavigation");
   }
 
-  return manifest
+  return manifest;
 }
