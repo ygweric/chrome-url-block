@@ -55,16 +55,17 @@
       >
         <template #actions="{ record }">
           <a-space>
-            <!-- <a-button @click="updateUrl(record)">
-              Edit
-            </a-button> -->
             <a-popconfirm
               :content="`Delete '${
                 activedTabKey === 'domain' ? record.domain : record.url
               }' ?`"
               ok-text="OK"
               cancel-text="Cancel"
-              @ok="removeUrl(record)"
+              @ok="
+                activedTabKey === 'domain'
+                  ? removeDomain(record)
+                  : removeUrl(record)
+              "
             >
               <a-button type="primary" status="danger"> Delete </a-button>
             </a-popconfirm>
@@ -97,7 +98,12 @@ import {
   IconEmail,
   IconUser,
 } from "@arco-design/web-vue/es/icon";
-import { addBlockDomain, addBlockURL, removeBlockURL } from "~/logic/general";
+import {
+  addBlockDomain,
+  addBlockURL,
+  removeBlockDomain,
+  removeBlockURL,
+} from "~/logic/general";
 import { blockedDomains, blockedUrls } from "~/logic/storage";
 
 const activedTabKey = ref("domain");
@@ -154,6 +160,10 @@ const addDomain = async () => {
 const removeUrl = (record: { url: string }) => {
   console.log("remove", record);
   removeBlockURL(record.url);
+};
+const removeDomain = (record: { domain: string }) => {
+  console.log("remove", record);
+  removeBlockDomain(record.domain);
 };
 // const urls = computed(() => blockedUrls.value.sort((a, b) => (a > b) ? 1 : -1).map(url => ({ url })))
 const urls = computed(() => blockedUrls.value.map((url) => ({ url })));

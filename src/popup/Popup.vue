@@ -1,51 +1,3 @@
-<script setup lang="ts">
-/* global browser */
-import {
-  IconClose,
-  IconCompass,
-  IconComputer,
-  IconEyeInvisible,
-  IconSettings,
-} from "@arco-design/web-vue/es/icon";
-import { computedAsync } from "@vueuse/core";
-import { blockedEnabled } from "~/logic/storage";
-import { addBlockDomain, addBlockURL, closeTab } from "~/logic/general";
-import { getDomainFromUrl } from "~/logic/utils";
-
-function openOptionsPage() {
-  browser.runtime.openOptionsPage();
-}
-
-const url = computedAsync(async () => {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-  const currentTab = tabs[0];
-  return currentTab.url;
-});
-const isHttpUrl = computedAsync(async () => {
-  return url.value?.startsWith("http");
-});
-
-const domain = computedAsync(async () => {
-  return getDomainFromUrl(url.value || "");
-});
-
-async function blockByAddress() {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-  const currentTab = tabs[0];
-  const url = currentTab.url;
-  console.log(url);
-  url && addBlockURL(url);
-  blockedEnabled.value && closeTab(currentTab);
-}
-async function blockByDomain() {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-  const currentTab = tabs[0];
-  console.log(domain);
-  domain && addBlockDomain(domain.value);
-  blockedEnabled.value && closeTab(currentTab);
-}
-</script>
-
 <template>
   <main
     class="w-[300px] px-4 py-5 text-center text-gray-700 flex flex-col flex-justify-begin items-center gap-y-6 min-h-72"
@@ -115,3 +67,50 @@ async function blockByDomain() {
     </div>
   </main>
 </template>
+<script setup lang="ts">
+/* global browser */
+import {
+  IconClose,
+  IconCompass,
+  IconComputer,
+  IconEyeInvisible,
+  IconSettings,
+} from "@arco-design/web-vue/es/icon";
+import { computedAsync } from "@vueuse/core";
+import { blockedEnabled } from "~/logic/storage";
+import { addBlockDomain, addBlockURL, closeTab } from "~/logic/general";
+import { getDomainFromUrl } from "~/logic/utils";
+
+function openOptionsPage() {
+  browser.runtime.openOptionsPage();
+}
+
+const url = computedAsync(async () => {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  return currentTab.url;
+});
+const isHttpUrl = computedAsync(async () => {
+  return url.value?.startsWith("http");
+});
+
+const domain = computedAsync(async () => {
+  return getDomainFromUrl(url.value || "");
+});
+
+async function blockByAddress() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  const url = currentTab.url;
+  console.log(url);
+  url && addBlockURL(url);
+  blockedEnabled.value && closeTab(currentTab);
+}
+async function blockByDomain() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  console.log(domain);
+  domain && addBlockDomain(domain.value);
+  blockedEnabled.value && closeTab(currentTab);
+}
+</script>

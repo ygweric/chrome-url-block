@@ -1,9 +1,3 @@
-<script setup lang="ts">
-import { useToggle } from "@vueuse/core";
-
-const [show, toggle] = useToggle(false);
-</script>
-
 <template>
   <div
     class="rr-fixed rr-right-48 rr-bottom-0 rr-m-5 rr-z-100 rr-flex rr-items-end rr-font-sans rr-select-none rr-leading-1em"
@@ -19,3 +13,9 @@ const [show, toggle] = useToggle(false);
     <a-button type="primary" @click="toggle()"> button </a-button>
   </div>
 </template>
+
+<script setup lang="ts">
+import { useToggle } from "@vueuse/core";
+
+const [show, toggle] = useToggle(false);
+</script>
