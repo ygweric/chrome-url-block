@@ -16,19 +16,17 @@ function openOptionsPage() {
   browser.runtime.openOptionsPage();
 }
 
-const isHttpUrl = computedAsync(async () => {
+const url = computedAsync(async () => {
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
-  const url = currentTab.url;
-  console.log(url);
-
-  return url?.startsWith("http");
+  return currentTab.url;
 });
+const isHttpUrl = computedAsync(async () => {
+  return url.value?.startsWith("http");
+});
+
 const domain = computedAsync(async () => {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
-  const currentTab = tabs[0];
-  const url = currentTab.url;
-  return getDomainFromUrl(url || "");
+  return getDomainFromUrl(url.value || "");
 });
 
 async function blockByAddress() {
@@ -98,6 +96,13 @@ async function blockByDomain() {
         </template>
         Block By Address
       </a-button>
+      <a-tooltip v-if="isHttpUrl" :content="url">
+        <div
+          class="mt-1 text-gray-600 underline w-40 text-nowrap text-ellipsis overflow-hidden"
+        >
+          {{ url }}
+        </div>
+      </a-tooltip>
     </div>
 
     <div class="w-40">
