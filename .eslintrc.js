@@ -56,7 +56,7 @@ module.exports = {
     "no-useless-escape": 0,
     "no-constant-condition": 0,
     "vue/multi-word-component-names": 0,
-    xxxxxx534: 0,
+    "vue/first-attribute-linebreak": 0,
     "no-undef": 0,
     xxxxxx446: 0,
     xxxxxx557: 0,

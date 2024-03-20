@@ -2,6 +2,8 @@
 /* global browser */
 import {
   IconClose,
+  IconCompass,
+  IconComputer,
   IconEyeInvisible,
   IconSettings,
 } from "@arco-design/web-vue/es/icon";
@@ -73,14 +75,14 @@ async function blockByDomain() {
         @click="blockByDomain"
       >
         <template #icon>
-          <IconClose />
+          <IconCompass />
         </template>
         Block By Domain
       </a-button>
       <div v-if="isHttpUrl" class="mt-1 text-gray-600 underline">
         {{ domain }}
       </div>
-      <a-divider></a-divider>
+      <a-divider class="mb-0"></a-divider>
     </div>
 
     <div class="w-40">
@@ -92,7 +94,7 @@ async function blockByDomain() {
         @click="blockByAddress"
       >
         <template #icon>
-          <IconEyeInvisible />
+          <IconComputer />
         </template>
         Block By Address
       </a-button>

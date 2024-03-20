@@ -17,11 +17,11 @@ export function removeBlockURL(url: string) {
 }
 
 export function addBlockDomain(domain: string) {
-  if (!blockedUrls.value.includes(domain)) blockedDomains.value.push(domain);
+  if (!blockedDomains.value.includes(domain)) blockedDomains.value.push(domain);
 }
 
 export function removeBlockDomain(domain: string) {
-  if (blockedUrls.value.includes(domain))
+  if (blockedDomains.value.includes(domain))
     blockedDomains.value = blockedDomains.value.filter(
       (item) => item !== domain
     );
