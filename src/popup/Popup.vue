@@ -1,57 +1,100 @@
 <script setup lang="ts">
-import { IconEyeInvisible, IconSettings } from '@arco-design/web-vue/es/icon'
-import { computedAsync } from '@vueuse/core'
-import { blockedEnabled } from '~/logic'
-import { addBlockURL, closeTab } from '~/logic/general'
+/* global browser */
+import {
+  IconClose,
+  IconEyeInvisible,
+  IconSettings,
+} from "@arco-design/web-vue/es/icon";
+import { computedAsync } from "@vueuse/core";
+import { blockedEnabled } from "~/logic/storage";
+import { addBlockDomain, addBlockURL, closeTab } from "~/logic/general";
+import { getDomainFromUrl } from "~/logic/utils";
 
 function openOptionsPage() {
-  browser.runtime.openOptionsPage()
+  browser.runtime.openOptionsPage();
 }
 
 const isHttpUrl = computedAsync(async () => {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true })
-  const currentTab = tabs[0]
-  const url = currentTab.url
-  console.log(url)
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  const url = currentTab.url;
+  console.log(url);
 
-  return url?.startsWith('http')
-})
-async function blockCurrentURL() {
-  const tabs = await browser.tabs.query({ active: true, currentWindow: true })
-  const currentTab = tabs[0]
-  const url = currentTab.url
-  console.log(url)
-  url && addBlockURL(url)
-  blockedEnabled.value && closeTab(currentTab)
+  return url?.startsWith("http");
+});
+const domain = computedAsync(async () => {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  const url = currentTab.url;
+  return getDomainFromUrl(url || "");
+});
+
+async function blockByAddress() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  const url = currentTab.url;
+  console.log(url);
+  url && addBlockURL(url);
+  blockedEnabled.value && closeTab(currentTab);
+}
+async function blockByDomain() {
+  const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+  const currentTab = tabs[0];
+  console.log(domain);
+  domain && addBlockDomain(domain.value);
+  blockedEnabled.value && closeTab(currentTab);
 }
 </script>
 
 <template>
-  <main class="w-[300px] px-4 py-5 text-center text-gray-700 flex flex-col flex-justify-begin items-center gap-y-6  min-h-72">
+  <main
+    class="w-[300px] px-4 py-5 text-center text-gray-700 flex flex-col flex-justify-begin items-center gap-y-6 min-h-72"
+  >
     <Logo />
-    <div class="font-size-6 color-red-600 font-bold -mt-4">
-      URL Block
-    </div>
+    <div class="text-lg text-gray-600 font-bold -mt-4">URL Block</div>
     <div class="flex items-center justify-between w-40">
-      <div class="mr-4">
-        On/Off
-      </div>
-      <a-switch v-model="blockedEnabled" unchecked-color="var(--color-fill-4)" checked-color="rgb(var(--primary-6))">
-        <template #checked>
-          ON
-        </template>
-        <template #unchecked>
-          OFF
-        </template>
+      <div class="mr-4">On/Off</div>
+      <a-switch
+        v-model="blockedEnabled"
+        unchecked-color="var(--color-fill-4)"
+        checked-color="rgb(var(--primary-6))"
+      >
+        <template #checked> ON </template>
+        <template #unchecked> OFF </template>
       </a-switch>
     </div>
 
     <div class="w-40">
-      <a-button status="warning" type="primary" long :disabled="!isHttpUrl" @click="blockCurrentURL">
+      <a-button
+        status="warning"
+        type="primary"
+        long
+        :disabled="!isHttpUrl"
+        @click="blockByDomain"
+      >
+        <template #icon>
+          <IconClose />
+        </template>
+        Block By Domain
+      </a-button>
+      <div v-if="isHttpUrl" class="mt-1 text-gray-600 underline">
+        {{ domain }}
+      </div>
+      <a-divider></a-divider>
+    </div>
+
+    <div class="w-40">
+      <a-button
+        status="warning"
+        type="outline"
+        long
+        :disabled="!isHttpUrl"
+        @click="blockByAddress"
+      >
         <template #icon>
           <IconEyeInvisible />
         </template>
-        Block Current URL
+        Block By Address
       </a-button>
     </div>
 
@@ -60,7 +103,7 @@ async function blockCurrentURL() {
         <template #icon>
           <IconSettings />
         </template>
-        Open Options
+        Setting
       </a-button>
     </div>
   </main>

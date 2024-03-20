@@ -1,22 +1,26 @@
 /// <reference types="vitest" />c
 
-import { dirname, relative } from 'node:path'
-import type { UserConfig } from 'vite'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import Components from 'unplugin-vue-components/vite'
+import { dirname, relative } from "node:path";
+import type { UserConfig } from "vite";
+import { defineConfig } from "vite";
+import Vue from "@vitejs/plugin-vue";
+// eslint-disable-next-line import/no-unresolved
+import Icons from "unplugin-icons/vite";
+// eslint-disable-next-line import/no-unresolved
+import IconsResolver from "unplugin-icons/resolver";
+// eslint-disable-next-line import/no-unresolved
+import Components from "unplugin-vue-components/vite";
 // import { ArcoResolver } from 'unplugin-vue-components/resolvers'
-import AutoImport from 'unplugin-auto-import/vite'
-import { isDev, port, r } from './scripts/utils'
-import packageJson from './package.json'
+// eslint-disable-next-line import/no-unresolved
+import AutoImport from "unplugin-auto-import/vite";
+import { isDev, port, r } from "./scripts/utils";
+import packageJson from "./package.json";
 
 export const sharedConfig: UserConfig = {
-  root: r('src'),
+  root: r("src"),
   resolve: {
     alias: {
-      '~/': `${r('src')}/`,
+      "~/": `${r("src")}/`,
     },
   },
   define: {
@@ -28,14 +32,12 @@ export const sharedConfig: UserConfig = {
 
     AutoImport({
       imports: [
-        'vue',
+        "vue",
         {
-          'webextension-polyfill': [
-            ['*', 'browser'],
-          ],
+          "webextension-polyfill": [["*", "browser"]],
         },
       ],
-      dts: r('src/auto-imports.d.ts'),
+      dts: r("src/auto-imports.d.ts"),
       resolvers: [
         // ArcoResolver()
       ],
@@ -43,13 +45,13 @@ export const sharedConfig: UserConfig = {
 
     // https://github.com/antfu/unplugin-vue-components
     Components({
-      dirs: [r('src/components')],
+      dirs: [r("src/components")],
       // generate `components.d.ts` for ts support with Volar
-      dts: r('src/components.d.ts'),
+      dts: r("src/components.d.ts"),
       resolvers: [
         // auto import icons
         IconsResolver({
-          prefix: '',
+          prefix: "",
         }),
         // ArcoResolver({
         //   sideEffect: true,
@@ -62,63 +64,60 @@ export const sharedConfig: UserConfig = {
 
     // rewrite assets to use relative path
     {
-      name: 'assets-rewrite',
-      enforce: 'post',
-      apply: 'build',
+      name: "assets-rewrite",
+      enforce: "post",
+      apply: "build",
       transformIndexHtml(html, { path }) {
-        return html.replace(/"\/assets\//g, `"${relative(dirname(path), '/assets')}/`)
+        return html.replace(
+          /"\/assets\//g,
+          `"${relative(dirname(path), "/assets")}/`
+        );
       },
     },
   ],
   optimizeDeps: {
-    include: [
-      'vue',
-      '@vueuse/core',
-      'webextension-polyfill',
-    ],
-    exclude: [
-      'vue-demi',
-    ],
+    include: ["vue", "@vueuse/core", "webextension-polyfill"],
+    exclude: ["vue-demi"],
   },
   css: {
     postcss: {
       plugins: [
-        require('tailwindcss'),
-        require('autoprefixer'),
+        // eslint-disable-next-line global-require
+        require("tailwindcss"),
+        // eslint-disable-next-line global-require
+        require("autoprefixer"),
       ],
     },
   },
-}
+};
 
 export default defineConfig(({ command }) => ({
   ...sharedConfig,
-  base: command === 'serve' ? `http://localhost:${port}/` : '/dist/',
+  base: command === "serve" ? `http://localhost:${port}/` : "/dist/",
   server: {
     port,
     hmr: {
-      host: 'localhost',
+      host: "localhost",
     },
   },
   build: {
-    watch: isDev
-      ? {}
-      : undefined,
-    outDir: r('extension/dist'),
+    watch: isDev ? {} : undefined,
+    outDir: r("extension/dist"),
     emptyOutDir: false,
-    sourcemap: isDev ? 'inline' : false,
+    sourcemap: isDev ? "inline" : false,
     // https://developer.chrome.com/docs/webstore/program_policies/#:~:text=Code%20Readability%20Requirements
     terserOptions: {
       mangle: false,
     },
     rollupOptions: {
       input: {
-        options: r('src/options/index.html'),
-        popup: r('src/popup/index.html'),
+        options: r("src/options/index.html"),
+        popup: r("src/popup/index.html"),
       },
     },
   },
   test: {
     globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
   },
-}))
+}));
