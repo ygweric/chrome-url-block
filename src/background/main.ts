@@ -2,10 +2,18 @@
 // @ts-ignore
 // eslint-disable-next-line import/no-unresolved
 import { onMessage, sendMessage } from "webext-bridge/background";
+import mixpanel from "mixpanel-browser";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import type { Tabs } from "webextension-polyfill";
 import "./urlBlock";
+import { MIXPANEL_TOKEN } from "~/logic/constants";
+
+mixpanel.init(MIXPANEL_TOKEN, {
+  debug: true,
+  track_pageview: true,
+  persistence: "localStorage",
+});
 
 // only on dev mode
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -871,6 +871,11 @@
   resolved "https://registry.npmmirror.com/@types/minimist/-/minimist-1.2.5.tgz#ec10755e871497bcd83efe927e43ec46e8c0747e"
   integrity sha512-hov8bUuiLiyFPGyFPE1lwWhmzYbirOXQNNo40+y3zow8aFVTeyn3VWL0VFFfdNddA8S4Vf0Tc062rzyNr7Paag==
 
+"@types/mixpanel-browser@^2.49.0":
+  version "2.49.0"
+  resolved "https://registry.npmmirror.com/@types/mixpanel-browser/-/mixpanel-browser-2.49.0.tgz#ad92ecc36fad63b9c0aed80b6283d86dbf52e49e"
+  integrity sha512-StmgUnS58d44DmIAEX9Kk8qwisAYCl6E2qulIjYyHXUPuJCPOuyUMTTKBp+aU2F2do+kxAzCxiBtsB4fnBT9Fg==
+
 "@types/node@*":
   version "20.11.28"
   resolved "https://registry.npmmirror.com/@types/node/-/node-20.11.28.tgz#4fd5b2daff2e580c12316e457473d68f15ee6f66"
@@ -5791,6 +5796,11 @@ mixin-deep@^1.2.0:
     for-in "^1.0.2"
     is-extendable "^1.0.1"
 
+mixpanel-browser@^2.49.0:
+  version "2.49.0"
+  resolved "https://registry.npmmirror.com/mixpanel-browser/-/mixpanel-browser-2.49.0.tgz#de3f4f2d0f3a32b4babf6d827ef983a9fd48a711"
+  integrity sha512-RZJCO7XXuuHBAWG5fd9Mavz994M7v7W3Qiaq8NzmN631pa4BQ0vNZQtRFqKcCCOBn4xqOZbX2GkuC7ZkQoL4cQ==
+
 mkdirp@1.0.4:
   version "1.0.4"
   resolved "https://registry.npmmirror.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
@@ -9271,6 +9281,7 @@ winreg@0.0.12:
   integrity sha512-typ/+JRmi7RqP1NanzFULK36vczznSNN8kWVA9vIqXyv8GhghUlwhGp1Xj3Nms1FsPcNnsQrJOR10N58/nQ9hQ==
 
 "wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+  name wrap-ansi-cjs
   version "7.0.0"
   resolved "https://registry.npmmirror.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
