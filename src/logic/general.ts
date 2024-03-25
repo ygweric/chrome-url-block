@@ -1,5 +1,10 @@
 import type { Tabs } from "webextension-polyfill";
-import { blockedDomains, blockedUrls } from "./storage";
+import {
+  blockedDomains,
+  blockedEnabled,
+  blockedUrls,
+  pauseUntilTime,
+} from "./storage";
 
 export async function closeTab(tab: Tabs.Tab) {
   await browser.tabs.remove([tab.id!]);
@@ -26,3 +31,20 @@ export function removeBlockDomain(domain: string) {
       (item) => item !== domain
     );
 }
+
+/**
+ * 判断是否到了turn on的时候
+ * 如果时间到了，则
+ *  1. 清空时间
+ *  2. turn on
+ *
+ * ?? pauseUntilTime.value  在popup中一直是0，为啥
+ */
+export const turnOnIfOnTime = () => {
+  if (!pauseUntilTime.value || Date.now() < pauseUntilTime.value) {
+    return;
+  }
+
+  pauseUntilTime.value = 0;
+  blockedEnabled.value = true;
+};
