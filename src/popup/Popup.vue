@@ -18,9 +18,9 @@
     </div>
     <div class="pb-4 border-b">
       <div class="flex items-center justify-between gap-x-4">
-        <div><Pic></Pic>Pause for{{ pauseForDuration }}</div>
+        <div><Pic></Pic>Pause for</div>
         <a-select v-model="pauseForDuration" :style="{ width: '150px' }">
-          <a-option :value="0.05">3 second</a-option>
+          <!-- <a-option :value="0.05">3 second</a-option> -->
           <a-option :value="1">1 minute</a-option>
           <a-option :value="10">10 minutes</a-option>
           <a-option :value="30">30 minutes</a-option>
@@ -28,14 +28,16 @@
           <a-option :value="240">4 hour</a-option>
           <a-option :value="480">8 hour</a-option>
         </a-select>
-        <a-button type="primary" @click="pauseForAWhile">Pause</a-button>
+        <a-button type="outline" status="success" @click="pauseForAWhile"
+          >Pause</a-button
+        >
       </div>
 
       <div v-if="pauseUntilTime" class="mt-2">
         <IconClockCircle />
-        <span>Will turn on at</span>
+        <span class="ml-2">Will turn on at</span>
         <span class="text-gray-950 font-semibold ml-1 mr-1">
-          {{ formatDate(new Date(pauseUntilTime), "MM-DD HH:mm:ss") }}</span
+          {{ formatDate(new Date(pauseUntilTime), "MM-DD HH:mm") }}</span
         >
         <span class="ml-1 mr-1">/</span>
         <span>in</span>
@@ -149,7 +151,13 @@ const domain = computedAsync(async () => {
   return getDomainFromUrl(url.value || "");
 });
 
+const resetBlockStaus = () => {
+  blockedEnabled.value = true;
+  pauseUntilTime.value = 0;
+};
+
 async function blockByAddress() {
+  resetBlockStaus();
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   const url = currentTab.url;
@@ -158,6 +166,7 @@ async function blockByAddress() {
   blockedEnabled.value && closeTab(currentTab);
 }
 async function blockByDomain() {
+  resetBlockStaus();
   const tabs = await browser.tabs.query({ active: true, currentWindow: true });
   const currentTab = tabs[0];
   console.log(domain);
