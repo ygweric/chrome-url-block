@@ -1,5 +1,7 @@
 # URL Block
 
+github 地址 [https://github.com/ygweric/chrome-url-block](https://github.com/ygweric/chrome-url-block)
+
 ## 项目背景 
 上班摸鱼时候，总喜欢看一下微博、观网、新闻网站，但自己觉得很无聊，但忍不住会打开。
 
@@ -14,6 +16,8 @@
 
 ## chrome地址 
 [https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb](https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb)
+
+离线crx下载地址 [https://github.com/ygweric/chrome-url-block/releases](https://github.com/ygweric/chrome-url-block/releases)
 
 理论上也可以编译为 Firefox插件，但是我我懒得做~
 
