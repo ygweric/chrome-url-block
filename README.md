@@ -1,36 +1,62 @@
+# URL Block
+
+## 项目背景 
+上班摸鱼时候，总喜欢看一下微博、观网、新闻网站，但自己觉得很无聊，但忍不住会打开。
+
+## 插件功能
+所以我开发了这个网站，能够屏蔽一些网站。
+
+
+主要功能如下
+* 根据域名屏蔽
+* 根据地址屏蔽
+* 暂停工作一会，划个水
+
+## chrome地址 
+[https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb](https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb)
+
+理论上也可以编译为 Firefox插件，但是我我懒得做~
+
+## 技术栈
+
+[vitesse](https://github.com/antfu/vitesse#variations) + vue3 + tailwindCSS
+
+## 效果截图
+![screenshot-1](/images/screenshot-1.jpg)
+![screenshot-2](/images/screenshot-2.png)
 
 
 
-# ~~浏览器中优化逻辑~~  
-**用不着**， 插件中的popup、options、background已经可以热更新了
-只有contentScript需要手动reload插件后，刷新页面
+## 编译
 
-只需要让**popup**,**options** 通过localhost访问，**background**不涉及UI，可以在浏览器调试
+我使用pnpm，但yarn、npm都支持
+***node version v18.20.0**
 
-1. vite.config
+### 编译运行
 ```
-AutoImport({
-  imports: [
-    'vue',
-    // {  // ----- 注释这里
-    //   'webextension-polyfill': [
-    //     ['*', 'browser'],
-    //   ],
-    // },
-  ],
-  dts: r('src/auto-imports.d.ts'),
-}),
-```
-
-2. src\logic\storage.ts
-```
-// import { useWebExtensionStorage } from '~/composables/useWebExtensionStorage'
-// export const storageDemo = useWebExtensionStorage('webext-demo', 'Storage Demo')
-
-export const storageDemo = 3 // 不使用 useWebExtensionStorage
+pnpm i 
+pnpm run dev
+pnpm run build
 ```
 
 
-## manifest.ts修改后，需要手动卸载插件在安装才生效
+## 现状
+
+* 两年前用原生的js写了1.0版本，没怎么维护。最近有头脑发热想维护下，就更新了2.0，UI和框架都好了很多，感谢 Vitesse大神的模板。
+* 主要自用很方便，纯自嗨
+* 目前用户1.7k左右
+![users-count](/images/users-count.png)
+
+* 无广告，无盈利，没有更远的发展打算
+* 欢迎PR
+
+## 未来
+* 没有未来
+* 欢迎朋友们一块讨论加wx群
+![wx-group](/images/wx-group.jpg)
+
+## 开发tips
+* 插件中的popup、options、background已经可以热更新了, 只有contentScript需要手动reload插件后，刷新页面
+* manifest.ts修改后，需要手动卸载插件在安装才生效
 
 
