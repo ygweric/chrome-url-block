@@ -2,6 +2,7 @@ import type { Tabs } from "webextension-polyfill";
 import {
   blockedDomains,
   blockedEnabled,
+  blockedRegexes,
   blockedUrls,
   pauseUntilTime,
 } from "./storage";
@@ -29,6 +30,17 @@ export function removeBlockDomain(domain: string) {
   if (blockedDomains.value.includes(domain))
     blockedDomains.value = blockedDomains.value.filter(
       (item) => item !== domain
+    );
+}
+
+export function addBlockRegex(regex: string) {
+  if (!blockedRegexes.value.includes(regex)) blockedRegexes.value.push(regex);
+}
+
+export function removeBlockRegex(regex: string) {
+  if (blockedRegexes.value.includes(regex))
+    blockedRegexes.value = blockedRegexes.value.filter(
+      (item) => item !== regex
     );
 }
 

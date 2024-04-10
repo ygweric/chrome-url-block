@@ -12,6 +12,11 @@ export const blockedDomains = useWebExtensionStorage(
   [] as string[]
 );
 
+export const blockedRegexes = useWebExtensionStorage(
+  "block_regexes",
+  [] as string[]
+);
+
 /**
  * 暂停直到x时间
  * 手动关闭时候失效

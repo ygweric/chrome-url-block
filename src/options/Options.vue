@@ -7,7 +7,7 @@
     <a-layout-content class="px-96">
       <a-form ref="formRef" :model="form" class="w-full">
         <a-row :gutter="8">
-          <a-col :span="16">
+          <a-col :span="14">
             <a-form-item
               label-col-flex="200px"
               field="url"
@@ -21,7 +21,7 @@
               />
             </a-form-item>
           </a-col>
-          <a-col :span="8">
+          <a-col :span="10">
             <a-space>
               <a-button status="warning" type="primary" @click="addDomain">
                 <template #icon>
@@ -35,6 +35,17 @@
                 </template>
                 Block By Address
               </a-button>
+              <a-dropdown trigger="hover" @select="handleMoreAction">
+                <a-button>More</a-button>
+                <template #content>
+                  <a-doption value="regex">
+                    <template #icon>
+                        <IconCodeSquare />
+                    </template>
+                    <template #default>Block By Regex</template>
+                  </a-doption>
+                </template>
+             </a-dropdown>
             </a-space>
           </a-col>
         </a-row>
@@ -44,28 +55,25 @@
         <a-tab-pane key="domain">
           <template #title> <IconCompass /> Domains </template>
         </a-tab-pane>
-        <a-tab-pane key="address" title="">
+        <a-tab-pane key="url">
           <template #title> <IconComputer /> Addresses </template>
+        </a-tab-pane>
+        <a-tab-pane key="regex">
+          <template #title> <IconCodeSquare /> Regex </template>
         </a-tab-pane>
       </a-tabs>
       <a-table
-        :columns="activedTabKey === 'domain' ? domainColumns : urlColumns"
-        :data="activedTabKey === 'domain' ? domains : urls"
+        :columns="columns[activedTabKey as keyof typeof columns]"
+        :data="tableData[activedTabKey as keyof typeof tableData].value"
         :pagination="{ 'show-page-size': true, 'show-total': true }"
       >
         <template #actions="{ record }">
           <a-space>
             <a-popconfirm
-              :content="`Delete '${
-                activedTabKey === 'domain' ? record.domain : record.url
-              }' ?`"
+              :content="`Delete '${record[activedTabKey]}' ?`"
               ok-text="OK"
               cancel-text="Cancel"
-              @ok="
-                activedTabKey === 'domain'
-                  ? removeDomain(record)
-                  : removeUrl(record)
-              "
+              @ok="removeFns[activedTabKey as keyof typeof removeFns](record)"
             >
               <a-button type="primary" status="danger"> Delete </a-button>
             </a-popconfirm>
@@ -92,51 +100,88 @@
 </template>
 
 <script setup lang="ts">
+import { Message } from "@arco-design/web-vue";
 import {
   IconCompass,
   IconComputer,
   IconEmail,
+  IconCodeSquare,
   IconUser,
 } from "@arco-design/web-vue/es/icon";
 import {
   addBlockDomain,
+  addBlockRegex,
   addBlockURL,
   removeBlockDomain,
+  removeBlockRegex,
   removeBlockURL,
 } from "~/logic/general";
-import { blockedDomains, blockedUrls } from "~/logic/storage";
+import { blockedDomains, blockedUrls, blockedRegexes } from "~/logic/storage";
 
 const activedTabKey = ref("domain");
 
 const form = reactive({ url: "" });
 const formRef = ref();
 
-const urlColumns = [
-  {
-    title: "URLs",
-    dataIndex: "url",
-    ellipsis: true,
-    tooltip: true,
-  },
-  {
-    width: 200,
-    title: "Actions",
-    slotName: "actions",
-  },
-];
-const domainColumns = [
-  {
-    title: "Domains",
-    dataIndex: "domain",
-    ellipsis: true,
-    tooltip: true,
-  },
-  {
-    width: 200,
-    title: "Actions",
-    slotName: "actions",
-  },
-];
+
+const columns = {
+  url: [
+    {
+      title: "URLs",
+      dataIndex: "url",
+      ellipsis: true,
+      tooltip: true,
+    },
+    {
+      width: 200,
+      title: "Actions",
+      slotName: "actions",
+    },
+  ],
+  domain: [
+    {
+      title: "Domains",
+      dataIndex: "domain",
+      ellipsis: true,
+      tooltip: true,
+    },
+    {
+      width: 200,
+      title: "Actions",
+      slotName: "actions",
+    },
+  ], 
+  regex: [
+    {
+      title: "Regex",
+      dataIndex: "regex",
+      ellipsis: true,
+      tooltip: true,
+    },
+    {
+      width: 200,
+      title: "Actions",
+      slotName: "actions",
+    },
+  ]
+}
+
+const urls = computed(() => blockedUrls.value.map((url) => ({ url })));
+const domains = computed(() =>
+  blockedDomains.value.map((domain) => ({ domain }))
+);
+
+const regexes = computed(() =>
+  blockedRegexes.value.map((regex) => ({ regex }))
+);
+
+
+const tableData = {
+  url: urls,
+  domain: domains,
+  regex: regexes
+}
+
 
 const onTabClick = (key: string) => {
   activedTabKey.value = key;
@@ -146,28 +191,63 @@ const addUrl = async () => {
   const errors = await formRef.value.validate();
   if (errors) return;
   addBlockURL(form.url);
+  Message.success('added')
+  activedTabKey.value='url'
+  // formRef.value.resetFields()
 };
 const addDomain = async () => {
   const errors = await formRef.value.validate();
   if (errors) return;
   addBlockDomain(form.url);
+  Message.success('added')
+  activedTabKey.value='domain'
+  // formRef.value.resetFields()
+};
+const addRegex = async () => {
+  const errors = await formRef.value.validate();
+  if (errors) return;
+  addBlockRegex(form.url);
+  Message.success('added')
+  activedTabKey.value='regex'
+  // formRef.value.resetFields()
 };
 
-// const updateUrl = (record: any) => {
-//   console.log('updateUrl', record)
-// }
 
 const removeUrl = (record: { url: string }) => {
   console.log("remove", record);
   removeBlockURL(record.url);
+  Message.success('deleted')
 };
 const removeDomain = (record: { domain: string }) => {
   console.log("remove", record);
   removeBlockDomain(record.domain);
+  
 };
-// const urls = computed(() => blockedUrls.value.sort((a, b) => (a > b) ? 1 : -1).map(url => ({ url })))
-const urls = computed(() => blockedUrls.value.map((url) => ({ url })));
-const domains = computed(() =>
-  blockedDomains.value.map((domain) => ({ domain }))
-);
+const removeRegex = (record: { regex: string }) => {
+  console.log("remove", record);
+  removeBlockRegex(record.regex);
+  
+};
+
+
+const handleMoreAction = (key:any) => {
+  switch (key) {
+    case 'regex':
+    addRegex()
+      break;
+  
+    default:
+      break;
+  }
+};
+
+
+
+const removeFns = {
+  url: removeUrl,
+  domain: removeDomain,
+  regex: removeRegex
+}
+
+
 </script>
