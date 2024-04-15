@@ -1,43 +1,48 @@
 # URL Block
 
-github 地址 [https://github.com/ygweric/chrome-url-block](https://github.com/ygweric/chrome-url-block)
+GitHub address [https://github.com/ygweric/chrome-url-block](https://github.com/ygweric/chrome-url-block)
 
-## 项目背景 
-上班摸鱼时候，总喜欢看一下微博、观网、新闻网站，但自己觉得很无聊，但忍不住会打开。
-
-## 插件功能
-所以我开发了这个网站，能够屏蔽一些网站。
+[中文文档](https://github.com/ygweric/chrome-url-block/blob/main-v2/README-ZH.md) | English Documentation
 
 
-主要功能如下
-* 根据域名屏蔽
-* 根据地址屏蔽
-* 根据正则表达式屏蔽
-* 暂停工作一会，划个水
+## Project Background
+When I go to work, I always like to look at microblogging, watching the Internet, news sites, but I feel very bored, but I can not help but open.
 
-## chrome地址 
+## Plugin function
+So I developed this website to block some websites.  
+
+### The main functions are as follows:
+* Shield according to the domain name
+* Shield according to address
+* Shield according to regular expression
+* Pause the work for a while, a paddle
+
+
+
+## Chrome address 
 [https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb](https://chromewebstore.google.com/detail/url-block/fdapkdfieimlngpkffldigiajemcamlb)
 
-离线crx下载地址 [https://github.com/ygweric/chrome-url-block/releases](https://github.com/ygweric/chrome-url-block/releases)
+Offline crx download address [https://github.com/ygweric/chrome-url-block/releases](https://github.com/ygweric/chrome-url-block/releases)
 
-理论上也可以编译为 Firefox插件，但是我我懒得做~
+Theoretically it could also be compiled as a Firefox plugin, but I'm I'm too lazy to do that~.
 
-## 技术栈
+## Technology Stack
 
 [vitesse](https://github.com/antfu/vitesse#variations) + vue3 + tailwindCSS
 
-## 效果截图
-![screenshot-1](/images/screenshot-1.jpg)
+## Screenshots
+![screenshot-1](/images/screenshot-1.png)
 ![screenshot-2](/images/screenshot-2.png)
 
 
 
-## 编译
+## Compiling
 
-我使用pnpm，但yarn、npm都支持
-***node version v18.20.0**
+I'm using **pnpm**, but **yarn** and **npm** are both supported
 
-### 编译运行
+**node version v18.20.0**
+
+### Compile and run
 ```
 pnpm i 
 pnpm run dev
@@ -45,23 +50,22 @@ pnpm run build
 ```
 
 
-## 现状
-
-* 两年前用原生的js写了1.0版本，没怎么维护。最近有头脑发热想维护下，就更新了2.0，UI和框架都好了很多，感谢 Vitesse大神的模板。
-* 主要自用很方便，纯自嗨
-* 目前用户1.7k左右
+## Current status
+* I wrote version 1.0 two years ago using native js and didn't maintain it much. Recently, I had a brainwave and wanted to maintain it, so I updated it to 2.0, and the UI and framework are much better, thanks to Vitesse's templates.
+* It's very easy to use, purely for self-improvement.
+* Currently about 1.7k users
 ![users-count](/images/users-count.png)
 
-* 无广告，无盈利，没有更远的发展打算
-* 欢迎PR
+* No ads, no profit, no further development plan.
+* Welcome to PR
 
-## 未来
-* 没有未来
-* 欢迎朋友们一块讨论加wx群
+## Future
+* No future
+* Welcome to discuss with friends and add wx group
 ![wx-group](/images/wx-group.jpg)
 
-## 开发tips
-* 插件中的popup、options、background已经可以热更新了, 只有contentScript需要手动reload插件后，刷新页面
-* manifest.ts修改后，需要手动卸载插件在安装才生效
+## Development Tips
+* Plugin popup, options, background can be hot update, only contentScript need to manually reload the plugin, refresh the page.
+* If you modify manifest.ts, you need to manually uninstall the plugin before installing it to take effect.
 
 
