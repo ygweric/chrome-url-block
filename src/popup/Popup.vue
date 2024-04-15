@@ -131,11 +131,8 @@ const pauseForAWhile = () => {
 const onSwitchChanged = (value: string | number | boolean, ev: Event) => {
   console.log(blockedEnabled.value);
 
-  // blockedEnabled.value = value as boolean
-  if (!blockedEnabled.value) {
-    // 如果关闭，之前的暂时关闭即使不再需要
-    pauseUntilTime.value = 0;
-  }
+  // 手动修改开关状态，则之前的暂停不在需要
+  pauseUntilTime.value = 0;
 };
 
 const url = computedAsync(async () => {
