@@ -12,6 +12,7 @@ github 地址 [https://github.com/ygweric/chrome-url-block](https://github.com/y
 主要功能如下
 * 根据域名屏蔽
 * 根据地址屏蔽
+* 根据正则表达式屏蔽
 * 暂停工作一会，划个水
 
 ## chrome地址 

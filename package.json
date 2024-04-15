@@ -6,6 +6,7 @@
   "packageManager": "pnpm@8.3.1",
   "description": "Block URLs",
   "scripts": {
+    "lint-staged": "npx lint-staged",
     "dev": "npm run clear && cross-env NODE_ENV=development run-p dev:*",
     "dev-firefox": "npm run clear && cross-env NODE_ENV=development EXTENSION=firefox run-p dev:*",
     "dev:prepare": "esno scripts/prepare.ts",

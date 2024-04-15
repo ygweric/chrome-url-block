@@ -1,7 +1,12 @@
 import type { Tabs } from "webextension-polyfill";
 import { getDomainFromUrl } from "~/logic/utils";
 import { closeTab, turnOnIfOnTime } from "../logic/general";
-import { blockedDomains, blockedEnabled, blockedRegexes, blockedUrls } from "../logic/storage";
+import {
+  blockedDomains,
+  blockedEnabled,
+  blockedRegexes,
+  blockedUrls,
+} from "../logic/storage";
 
 const blockUrl = (
   tabId: number,
@@ -22,10 +27,14 @@ const blockUrl = (
   const domain = getDomainFromUrl(changeInfo.url || "");
   if (blockedDomains.value.includes(domain)) {
     closeTab(tab);
-    return
+    return;
   }
 
-  if (blockedRegexes.value.some(regex => changeInfo.url?.match(new RegExp(regex, 'gi')))) {
+  if (
+    blockedRegexes.value.some((regex) =>
+      changeInfo.url?.match(new RegExp(regex, "gi"))
+    )
+  ) {
     closeTab(tab);
   }
 };
