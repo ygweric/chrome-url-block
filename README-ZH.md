@@ -61,7 +61,7 @@ pnpm run build
 ## 未来
 * 没有未来
 * 欢迎朋友们一块讨论加wx群
-![wx-group](/images/wx-group.jpg)
+![wx-group](https://raw.githubusercontent.com/ygweric/ygweric.github.io/main/assets/qr-schedule-update/indenpendent_dev.png)
 
 ## 开发tips
 * 插件中的popup、options、background已经可以热更新了, 只有contentScript需要手动reload插件后，刷新页面

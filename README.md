@@ -62,7 +62,7 @@ pnpm run build
 ## Future
 * No future
 * Welcome to discuss with friends and add wx group
-![wx-group](/images/wx-group.jpg)
+![wx-group](https://raw.githubusercontent.com/ygweric/ygweric.github.io/main/assets/qr-schedule-update/indenpendent_dev.png)
 
 ## Development Tips
 * Plugin popup, options, background can be hot update, only contentScript need to manually reload the plugin, refresh the page.
