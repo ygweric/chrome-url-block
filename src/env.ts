@@ -15,7 +15,7 @@ let navigator: any;
 export const isFirefox = navigator?.userAgent?.includes("Firefox");
 
 /* 配置插件包含的内容 */
-export const hasPopupPage = true;
+export const hasPopupPage = false;
 export const hasOptionPage = true;
 export const hasBackgroundScript = true;
-export const hasContentScript = false;
+export const hasContentScript = true;
