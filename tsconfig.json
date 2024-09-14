@@ -9,6 +9,8 @@
     "incremental": false,
     "skipLibCheck": true,
     "jsx": "preserve",
+    "allowJs": true,                 
+    "checkJs": false, 
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noUnusedLocals": true,

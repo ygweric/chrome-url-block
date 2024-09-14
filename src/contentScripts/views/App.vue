@@ -20,7 +20,16 @@
 <script setup lang="ts">
 import { useToggle } from "@vueuse/core";
 
+import showdown from "../showdown.js";
+import $ from "jquery";
+
 const [show, toggle] = useToggle(false);
+
+var converter =  new showdown.Converter({
+  extensions: ['prettify', 'tasklist', 'footnote'],
+  tables: true
+});
+
 
 const convertRelativeImgToAbsolute = () => {
   console.log("convertRelativeImgToAbsolute");
