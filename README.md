@@ -53,7 +53,7 @@ pnpm run build
 ## Current status
 * I wrote version 1.0 two years ago using native js and didn't maintain it much. Recently, I had a brainwave and wanted to maintain it, so I updated it to 2.0, and the UI and framework are much better, thanks to Vitesse's templates.
 * It's very easy to use, purely for self-improvement.
-* Currently about 1.7k users
+* Currently about 4k users
 ![users-count](/images/users-count.png)
 
 * No ads, no profit, no further development plan.
@@ -61,8 +61,7 @@ pnpm run build
 
 ## Future
 * No future
-* Welcome to discuss with friends and add wx group
-![wx-group](https://raw.githubusercontent.com/ygweric/ygweric.github.io/main/assets/qr-schedule-update/indenpendent_dev.png)
+* Welcome to discuss with friends and add wx **ygweric**
 
 ## Development Tips
 * Plugin popup, options, background can be hot update, only contentScript need to manually reload the plugin, refresh the page.
