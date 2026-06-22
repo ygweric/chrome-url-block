@@ -54,7 +54,7 @@ pnpm run build
 * I wrote version 1.0 two years ago using native js and didn't maintain it much. Recently, I had a brainwave and wanted to maintain it, so I updated it to 2.0, and the UI and framework are much better, thanks to Vitesse's templates.
 * It's very easy to use, purely for self-improvement.
 * Currently about 4k users
-![users-count](/images/users_count_2.png)
+![users-count](/images/user_count_2.png)
 
 * No ads, no profit, no further development plan.
 * Welcome to PR
